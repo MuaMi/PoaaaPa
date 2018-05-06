@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="main/javascript/jquery.js"></script>
+    <script src="main/javascript/plug-ins/layerUi/layer.js"></script>
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -54,15 +56,15 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <!-- Start Sign In Form -->
-            <form action="index.jsp" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
+            <form action="/poaaapa/login.go?method=login" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
                 <h2>登录--POAAAPA系统</h2>
                 <div class="form-group">
                     <label for="username" class="sr-only">登录账号</label>
-                    <input type="text" class="form-control" id="username" name="name" placeholder="登录账号" autocomplete="off">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="登录账号" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">登录密码</label>
-                    <input type="password" class="form-control" id="password" name="url" placeholder="登录密码" autocomplete="off">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="登录密码" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <p><a href="register.jsp">注册新账号</a> </p>
@@ -91,8 +93,12 @@
 <!-- Main JS -->
 <script src="js/main.js"></script>
 
+<script>
+    var error ='<%=request.getParameter("error")%>';
+    if(error == 501){
+        layer.msg("密码错误！")
+    }
+</script>
 
 </body>
-</html>
-
 </html>

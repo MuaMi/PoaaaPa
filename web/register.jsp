@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="main/javascript/jquery.js"></script>
+    <script src="main/javascript/plug-ins/layerUi/layer.js"></script>
+
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
@@ -51,19 +54,19 @@
         <div class="col-md-4 col-md-offset-4">
 
             <!-- Start Sign In Form -->
-            <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+            <form action="/poaaapa/login.go?method=regist" method="post" class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <h2>注册新账号</h2>
                 <div class="form-group">
                     <label for="username" class="sr-only">用户名</label>
-                    <input type="text" class="form-control" id="username" placeholder="请输入用户名" autocomplete="off">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="nickname" class="sr-only">昵称</label>
-                    <input type="text" class="form-control" id="nickname" placeholder="请输入昵称" autocomplete="off">
+                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="请输入昵称" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">密码</label>
-                    <input type="password" class="form-control" id="password" placeholder="请输入密码" autocomplete="off">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="re-password" class="sr-only">确认密码</label>
@@ -95,7 +98,12 @@
 <script src="js/jquery.waypoints.min.js"></script>
 <!-- Main JS -->
 <script src="js/main.js"></script>
-
+<script>
+    var error ='<%=request.getParameter("error")%>';
+    if(error == 502){
+        layer.msg("用户名已存在！")
+    }
+</script>
 </body>
 </html>
 
