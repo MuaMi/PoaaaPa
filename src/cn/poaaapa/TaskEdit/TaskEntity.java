@@ -5,7 +5,7 @@ import java.sql.Date;
 public class TaskEntity {
 
     int id;
-    String userId;
+    int userId;
     String taskName;
     int taskType;
     int taskState;
@@ -23,11 +23,11 @@ public class TaskEntity {
         this.id = id;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

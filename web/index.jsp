@@ -1,4 +1,7 @@
-<%--
+<%@ page import="cn.poaaapa.login.LoginAction" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cn.poaaapa.TaskEdit.TaskEntity" %>
+<%@ page import="cn.poaaapa.TaskEdit.TaskAction" %><%--
   Created by IntelliJ IDEA.
   User: WYZ
   Date: 2018/4/5
@@ -13,7 +16,6 @@
   <title>后台管理系统-HTML5后台管理系统</title>
   <meta name="keywords"  content="设置关键词..." />
   <meta name="description" content="设置描述..." />
-  <meta name="author" content="DeathGhost" />
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <link rel="icon" href="main/images/icon/favicon.ico" type="image/x-icon">
@@ -25,13 +27,21 @@
   <script src="main/javascript/public.js"></script>
 </head>
 <body>
+<%
+    String username = (String)session.getAttribute("username");
+    String nickname= LoginAction.getNameByUser(username);
+    int userid = LoginAction.getIdByName(username);
+    TaskAction ta =new TaskAction();
+    List<TaskEntity> list = ta.queryAll4User(userid);
+    String taskStates[] ={"未开始","进行中","已完成"};
+%>
 <div class="main-wrap">
   <div class="content-wrap">
     <header class="top-hd">
       <div class="hd-rt">
         <ul>
           <li>
-            <a><i class="icon-user"></i><em>用户名</em></a>
+            <a><i class="icon-user"></i><em><%=nickname %></em></a>
           </li>
           <li>
             <a href="javascript:void(0)" id="SignOut"><i class="icon-signout"></i>安全退出</a>
@@ -63,16 +73,24 @@
           </tr>
           </thead>
           <tbody>
+
+          <%
+              for(TaskEntity task:list){
+          %>
           <tr class="cen">
-            <td>#001</td>
-            <td class="lt"><a href="#">百度搜索</a></td>
-            <td>https:www.baidu.com</td>
-            <td><button class="btn btn-danger radius-rounded">任务失败</button></td>
+            <td><%=task.getId()%></td>
+            <td><%=task.getTaskName()%></td>
+            <td><%=task.getUrl()%></td>
+            <td><button class="btn btn-danger radius-rounded"><%=taskStates[task.getTaskState()]%></button></td>
             <td>
-              <a href="javascript:void(0)" title="编辑" class="mr-5" id="edit">编辑</a>
-              <a href="javascript:void(0)" title="删除" id="delete">删除</a>
+                <a href="javascript:void(0)" title="开始" class="mr-5" id="start">开始</a>
+                <a href="javascript:void(0)" title="编辑" class="mr-5" id="edit">编辑</a>
+                <a href="javascript:void(0)" title="删除" id="delete">删除</a>
             </td>
           </tr>
+          <%
+              }
+          %>
           </tbody>
         </table>
 
@@ -90,7 +108,7 @@
             shadeClose: true,
             shade: false,
             maxmin: true, //开启最大化最小化按钮
-            area: ['893px', '600px'],
+            area: ['800px', '500px'],
             content: 'newTask.jsp'
         });
     });
@@ -102,14 +120,14 @@
             shadeClose: true,
             shade: false,
             maxmin: true, //开启最大化最小化按钮
-            area: ['893px', '600px'],
+            area: ['800px', '500px'],
             content: 'editTask.jsp'
         });
     });
-    //编辑
+    //删除
     $('#delete').click(function(){
         layer.open({
-            content: 'test'
+            content: '是否删除？'
             ,btn: ['确定', '取消']
             ,yes: function(index, layero){
                 console.log("点击了确定");

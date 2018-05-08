@@ -13,7 +13,6 @@
     <title>后台管理系统-HTML5后台管理系统</title>
     <meta name="keywords"  content="设置关键词..." />
     <meta name="description" content="设置描述..." />
-    <meta name="author" content="DeathGhost" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
@@ -29,118 +28,66 @@
 <div class="main-wrap">
 
     <div class="page-wrap">
-        <div class="form-group-col-2">
-            <div class="form-label">任务名称：</div>
-            <div class="form-cont">
-                <input type="text" placeholder="任务名称" class="form-control form-boxed">
+        <form action="/poaaapa/taskEdit.go?method=new" name="task_form" id="task_form" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
+
+            <div class="form-group-col-2">
+                <div class="form-label">公有/私有：</div>
+                <div class="form-cont">
+                    <select name="taskType" style="width:auto;" onchange="onSelect(this)">
+                        <option value="1" selected="selected">公有</option>
+                        <option value="2">私有</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务url：</div>
-            <div class="form-cont">
-                <input type="tel" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
-                <%--<button class="btn btn-secondary-outline">测试</button>--%>
-                <%--<span class="word-aux"><i class="icon-warning-sign"></i>清正确输入11位手机号码</span>--%>
+            <div class="form-group-col-2">
+                <div class="form-label">任务名称：</div>
+                <div class="form-cont">
+                    <input type="text" name="taskName" placeholder="任务名称" class="form-control form-boxed">
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务类别：</div>
-            <div class="form-cont">
-                <select style="width:auto;">
-                    <option>淘宝</option>
-                    <option>天猫</option>
-                    <option>知乎</option>
-                    <option>百度</option>
-                    <option>自定义</option>
-                </select>
-                <%--<select style="width:auto;">--%>
-                <%--<option>子分类</option>--%>
-                <%--<option>上装</option>--%>
-                <%--<option>下装</option>--%>
-                <%--</select>--%>
+            <div class="form-group-col-2">
+                <div class="form-label">任务url：</div>
+                <div class="form-cont">
+                    <input type="text" name="taskUrl" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
+                    <%--<button class="btn btn-secondary-outline">测试</button>--%>
+                    <%--<span class="word-aux"><i class="icon-warning-sign"></i>清正确输入11位手机号码</span>--%>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务规则：</div>
-            <div class="form-cont">
-                <textarea class="form-control form-boxed">任务规则</textarea>
+            <div class="form-group-col-2">
+                <div class="form-label">任务类别：</div>
+                <div class="form-cont">
+                    <select name="urlType" style="width:auto;" onchange="onSelect(this)">
+                        <option value="1">淘宝</option>
+                        <option value="2">天猫</option>
+                        <option value="3">知乎</option>
+                        <option value="4">百度</option>
+                        <option value="0" selected="selected">自定义</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <%--<div class="form-group-col-2">--%>
-        <%--<div class="form-label">兴趣爱好：</div>--%>
-        <%--<div class="form-cont">--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" checked="checked" name="mmm">--%>
-        <%--<span>读书</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>听音乐</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>羽毛球</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>篮球</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>足球</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" checked="checked" name="mmm">--%>
-        <%--<span>读书</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>听音乐</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>羽毛球</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>篮球</span>--%>
-        <%--</label>--%>
-        <%--<label class="check-box">--%>
-        <%--<input type="checkbox" name="mmm">--%>
-        <%--<span>足球</span>--%>
-        <%--</label>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="form-group-col-2">--%>
-        <%--<div class="form-label">性别：</div>--%>
-        <%--<div class="form-cont">--%>
-        <%--<label class="radio">--%>
-        <%--<input type="radio" name="sex">--%>
-        <%--<span>男士</span>--%>
-        <%--</label>--%>
-        <%--<label class="radio">--%>
-        <%--<input type="radio" name="sex" checked="checked">--%>
-        <%--<span>女士</span>--%>
-        <%--</label>--%>
-        <%--<label class="radio">--%>
-        <%--<input type="radio" name="sex">--%>
-        <%--<span>保密</span>--%>
-        <%--</label>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <div class="form-group-col-2">
-            <div class="form-label">备注：</div>
-            <div class="form-cont">
-                <textarea class="form-control form-boxed">备注信息</textarea>
+            <div  class="form-group-col-2" >
+                <div class="form-label">任务规则：</div>
+                <div class="form-cont">
+                    <textarea id="urlRule" name="taskRule" class="form-control form-boxed">自定义任务必填...</textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label"></div>
-            <div class="form-cont">
-                <input type="submit" class="btn btn-primary" value="提交任务">
-                <%--<input type="reset" class="btn btn-disabled" value="禁止">--%>
+            <div class="form-group-col-2">
+                <div class="form-label">备注：</div>
+                <div class="form-cont">
+                    <textarea name="comment" class="form-control form-boxed">备注信息</textarea>
+                </div>
             </div>
-        </div>
+            <div class="form-group-col-2">
+                <div class="form-label"></div>
+                <div class="form-cont">
+                    <%--<input type="button" class="btn btn-primary" value="提交任务" onclick="submit()">
+                    <%--<input type="reset" class="btn btn-disabled" value="禁止">--%>
+                    <button class="btn btn-primary" name="submit" id="submit">提交任务</button>
+                </div>
+            </div>
+            <!--开始::结束-->
+
+        </form>
         <!--开始::结束-->
     </div>
 

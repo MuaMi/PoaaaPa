@@ -13,7 +13,6 @@
     <title>后台管理系统-HTML5后台管理系统</title>
     <meta name="keywords"  content="设置关键词..." />
     <meta name="description" content="设置描述..." />
-    <meta name="author" content="DeathGhost" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
@@ -31,6 +30,15 @@
     <div class="page-wrap">
         <form action="/poaaapa/taskEdit.go?method=new" name="task_form" id="task_form" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
             <div class="form-group-col-2">
+                <div class="form-label">公有/私有：</div>
+                <div class="form-cont">
+                    <select name="taskType" style="width:auto;" onchange="onSelect(this)">
+                        <option value="1" selected="selected">公有</option>
+                        <option value="2">私有</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group-col-2">
                 <div class="form-label">任务名称：</div>
                 <div class="form-cont">
                     <input type="text" name="taskName" placeholder="任务名称" class="form-control form-boxed">
@@ -39,7 +47,7 @@
             <div class="form-group-col-2">
                 <div class="form-label">任务url：</div>
                 <div class="form-cont">
-                    <input type="tel" name="taskUrl" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
+                    <input type="text" name="taskUrl" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
                     <%--<button class="btn btn-secondary-outline">测试</button>--%>
                     <%--<span class="word-aux"><i class="icon-warning-sign"></i>清正确输入11位手机号码</span>--%>
                 </div>
@@ -47,7 +55,7 @@
             <div class="form-group-col-2">
                 <div class="form-label">任务类别：</div>
                 <div class="form-cont">
-                    <select name="urlType" style="width:auto;">
+                    <select name="urlType" style="width:auto;" onchange="onSelect(this)">
                         <option value="1">淘宝</option>
                         <option value="2">天猫</option>
                         <option value="3">知乎</option>
@@ -56,10 +64,10 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group-col-2">
+            <div  class="form-group-col-2" >
                 <div class="form-label">任务规则：</div>
                 <div class="form-cont">
-                    <textarea name="taskRule" class="form-control form-boxed">任务规则</textarea>
+                    <textarea id="urlRule" name="taskRule" class="form-control form-boxed">自定义任务必填...</textarea>
                 </div>
             </div>
             <div class="form-group-col-2">
@@ -112,26 +120,40 @@
     //         }
     //     });
     // });
-    <%--function testSession() {--%>
-        <%--<% String name=(String)session.getAttribute("username");--%>
-            <%--if(name==null){--%>
-            <%--response.sendRedirect("login.jsp?error=1200");--%>
-        <%--} %>--%>
-    <%--}--%>
+    function onSelect(select) {
+        if(select.options.selectedIndex==4){
+            document.getElementById("urlRule").readOnly=false;
+        }else{
+            document.getElementById("urlRule").readOnly=true;
+        }
+
+    }
+    function testSession() {
+        <% String name=(String)session.getAttribute("username");
+            if(name==null){
+            response.sendRedirect("login.jsp?error=1200");
+        } %>
+    }
     var strreturn ="<%=request.getParameter("return")%>";
     if(strreturn =="null"){
 
     }
-    else if("success"==strreturn.toString())
+    else if("true"==strreturn.toString())
     {
         layer.alert("添加成功！",function () {
             window.parent.location.reload();
             parent.layer.close(index);
         });
     }
-    else
+    else if("empty"==strreturn)
     {
-        layer.msg("添加失败！");
+        layer.msg("添加失败！任务名称及url不能为空");
+    }else if("rule"==strreturn)
+    {
+        layer.msg("添加失败！请输入爬取规则");
+    }
+    else{
+        layer.msg("添加失败！未知错误");
     }
 </script>
 

@@ -51,5 +51,38 @@ public class LoginAction {
         return result;
     }
 
+    public static int getIdByName(String username){
+        try {
+            Connection conn = Pa_db.getConnection();
+            String sql = "select id from user where user = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt("id");
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    public static String getNameByUser(String username){
+        try {
+            Connection conn = Pa_db.getConnection();
+            String sql = "select name from user where user = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getString("name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
 
 }
