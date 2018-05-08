@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: JHQ
+  User: WYZ
   Date: 2018/4/5
   Time: 12:03
   To change this template use File | Settings | File Templates.
@@ -34,7 +34,7 @@
             <a><i class="icon-user"></i><em>用户名</em></a>
           </li>
           <li>
-            <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+            <a href="javascript:void(0)" id="SignOut"><i class="icon-signout"></i>安全退出</a>
           </li>
         </ul>
       </div>
@@ -121,6 +121,27 @@
             }
         });
     });
+    //安全退出
+    $('#SignOut').click(function(){
+        layer.confirm('确定登出管理中心？', {
+                   title:'系统提示',
+                   btn: ['确定','取消']
+               }, function(){
+            $.post('login.go?method=logout',function (retData) {
+                if (retData == 'success') {
+                    location.href = 'login.jsp';
+                } else {
+                    layer.msg("失败");
+                }
+            });
+        });
+    });
+    function testSession() {
+        <% String name=(String)session.getAttribute("username");
+            if(name==null){
+            response.sendRedirect("login.jsp?error=1200");
+        } %>
+    }
 </script>
 </body>
 </html>

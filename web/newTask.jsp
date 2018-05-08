@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: JHQ
+  User: WYZ
   Date: 2018/4/10
   Time: 0:11
   To change this template use File | Settings | File Templates.
@@ -29,126 +29,114 @@
 <div class="main-wrap">
 
     <div class="page-wrap">
-        <div class="form-group-col-2">
-            <div class="form-label">任务名称：</div>
-            <div class="form-cont">
-                <input type="text" placeholder="任务名称" class="form-control form-boxed">
+        <form action="/poaaapa/taskEdit.go?method=new" name="task_form" id="task_form" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
+            <div class="form-group-col-2">
+                <div class="form-label">任务名称：</div>
+                <div class="form-cont">
+                    <input type="text" name="taskName" placeholder="任务名称" class="form-control form-boxed">
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务url：</div>
-            <div class="form-cont">
-                <input type="tel" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
-                <%--<button class="btn btn-secondary-outline">测试</button>--%>
-                <%--<span class="word-aux"><i class="icon-warning-sign"></i>清正确输入11位手机号码</span>--%>
+            <div class="form-group-col-2">
+                <div class="form-label">任务url：</div>
+                <div class="form-cont">
+                    <input type="tel" name="taskUrl" placeholder="任务url..." class="form-control form-boxed" style="width:300px;">
+                    <%--<button class="btn btn-secondary-outline">测试</button>--%>
+                    <%--<span class="word-aux"><i class="icon-warning-sign"></i>清正确输入11位手机号码</span>--%>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务类别：</div>
-            <div class="form-cont">
-                <select style="width:auto;">
-                    <option>淘宝</option>
-                    <option>天猫</option>
-                    <option>知乎</option>
-                    <option>百度</option>
-                    <option>自定义</option>
-                </select>
-                <%--<select style="width:auto;">--%>
-                    <%--<option>子分类</option>--%>
-                    <%--<option>上装</option>--%>
-                    <%--<option>下装</option>--%>
-                <%--</select>--%>
+            <div class="form-group-col-2">
+                <div class="form-label">任务类别：</div>
+                <div class="form-cont">
+                    <select name="urlType" style="width:auto;">
+                        <option value="1">淘宝</option>
+                        <option value="2">天猫</option>
+                        <option value="3">知乎</option>
+                        <option value="4">百度</option>
+                        <option value="0" selected="selected">自定义</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label">任务规则：</div>
-            <div class="form-cont">
-                <textarea class="form-control form-boxed">任务规则</textarea>
+            <div class="form-group-col-2">
+                <div class="form-label">任务规则：</div>
+                <div class="form-cont">
+                    <textarea name="taskRule" class="form-control form-boxed">任务规则</textarea>
+                </div>
             </div>
-        </div>
-        <%--<div class="form-group-col-2">--%>
-            <%--<div class="form-label">兴趣爱好：</div>--%>
-            <%--<div class="form-cont">--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" checked="checked" name="mmm">--%>
-                    <%--<span>读书</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>听音乐</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>羽毛球</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>篮球</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>足球</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" checked="checked" name="mmm">--%>
-                    <%--<span>读书</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>听音乐</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>羽毛球</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>篮球</span>--%>
-                <%--</label>--%>
-                <%--<label class="check-box">--%>
-                    <%--<input type="checkbox" name="mmm">--%>
-                    <%--<span>足球</span>--%>
-                <%--</label>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="form-group-col-2">--%>
-            <%--<div class="form-label">性别：</div>--%>
-            <%--<div class="form-cont">--%>
-                <%--<label class="radio">--%>
-                    <%--<input type="radio" name="sex">--%>
-                    <%--<span>男士</span>--%>
-                <%--</label>--%>
-                <%--<label class="radio">--%>
-                    <%--<input type="radio" name="sex" checked="checked">--%>
-                    <%--<span>女士</span>--%>
-                <%--</label>--%>
-                <%--<label class="radio">--%>
-                    <%--<input type="radio" name="sex">--%>
-                    <%--<span>保密</span>--%>
-                <%--</label>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <div class="form-group-col-2">
-            <div class="form-label">备注：</div>
-            <div class="form-cont">
-                <textarea class="form-control form-boxed">备注信息</textarea>
+            <div class="form-group-col-2">
+                <div class="form-label">备注：</div>
+                <div class="form-cont">
+                    <textarea name="comment" class="form-control form-boxed">备注信息</textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group-col-2">
-            <div class="form-label"></div>
-            <div class="form-cont">
-                <input type="submit" class="btn btn-primary" value="提交任务">
-                <%--<input type="reset" class="btn btn-disabled" value="禁止">--%>
+            <div class="form-group-col-2">
+                <div class="form-label"></div>
+                <div class="form-cont">
+                    <%--<input type="button" class="btn btn-primary" value="提交任务" onclick="submit()">
+                    <%--<input type="reset" class="btn btn-disabled" value="禁止">--%>
+                    <button class="btn btn-primary" name="submit" id="submit">提交任务</button>
+                </div>
             </div>
-        </div>
-        <!--开始::结束-->
+            <!--开始::结束-->
+        </form>
     </div>
 
-        </div>
-
-
-
 </div>
+<script>
+    // $("submit").click(function(){
+    //     var options={
+    //         url:'taskEdit.go?method=new',
+    //         type:'post',
+    //         success:function(retData) {
+    //             if (retData == 'success') {
+    //                 layer.msg("添加成功！",function(){
+    //                     var index = parent.layer.getFrameIndex();
+    //                     window.parent.location.reload();
+    //                     parent.layer.close(index);
+    //                 });
+    //             } else {
+    //                 layer.msg("失败");
+    //             }
+    //         }
+    //     }
+    // });
+
+
+    // $("body").on("click",".button1",function (){
+    //     $.ajax({
+    //         type:"post",
+    //         url:"taskEdit.go?method=new",
+    //         data: $("form").serialize(),//表单数据
+    //         success:function(){
+    //             layer.close(layer.index);
+    //             window.parent.location.reload();
+    //         }
+    //     });
+    // });
+    <%--function testSession() {--%>
+        <%--<% String name=(String)session.getAttribute("username");--%>
+            <%--if(name==null){--%>
+            <%--response.sendRedirect("login.jsp?error=1200");--%>
+        <%--} %>--%>
+    <%--}--%>
+    var strreturn ="<%=request.getParameter("return")%>";
+    if(strreturn =="null"){
+
+    }
+    else if("success"==strreturn.toString())
+    {
+        layer.alert("添加成功！",function () {
+            window.parent.location.reload();
+            parent.layer.close(index);
+        });
+    }
+    else
+    {
+        layer.msg("添加失败！");
+    }
+</script>
+
+
+
 
 
 

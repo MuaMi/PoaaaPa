@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: JHQ
+  User: WYZ
   Date: 2018/4/5
   Time: 15:28
   To change this template use File | Settings | File Templates.
@@ -97,6 +97,8 @@
     var error ='<%=request.getParameter("error")%>';
     if(error == 501){
         layer.msg("密码错误！")
+    }else if(error == 1200){
+        layer.msg("请先登陆！");
     }
 </script>
 

@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
             }else if("logout".equals(method)){
                 request.getSession().removeAttribute("username");
-                response.sendRedirect("login.jsp");
+                response.getWriter().print("success");
             }
 
         }
