@@ -51,6 +51,7 @@ public class TaskAction {
             TaskEntity t = null;
             if (rs.next()){
                 t = new TaskEntity();
+                t.setId(rs.getInt("id"));
                 t.setTaskName(rs.getString("taskName"));
                 t.setTaskType(rs.getInt("taskType"));
                 t.setTaskState(rs.getInt("taskState"));
@@ -84,7 +85,7 @@ public class TaskAction {
     public boolean updateTask(TaskEntity task ){
         try {
             Connection con = Pa_db.getConnection();
-            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?,startTime =? where id =? ;";
+            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?where id =? ;";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1,task.getTaskName());
             pstmt.setInt(2,task.getTaskType());
@@ -94,11 +95,10 @@ public class TaskAction {
             pstmt.setString(6,task.getComment());
             pstmt.setInt(7,task.getUserId());
             pstmt.setString(8,task.getCreateTime().toString());
-            pstmt.setString(9,task.getStartTime().toString());
-            pstmt.setInt(10,task.getId());
+            pstmt.setInt(9,task.getId());
 
-            boolean r = pstmt.execute();
-            return r;
+            int r = pstmt.executeUpdate();
+            return r>0;
         } catch (Exception e) {
             e.printStackTrace();
         }

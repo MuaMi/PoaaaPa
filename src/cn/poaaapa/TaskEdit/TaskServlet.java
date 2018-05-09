@@ -30,29 +30,68 @@ public class TaskServlet extends HttpServlet {
         if("new".equals(method)){
             String urlType=request.getParameter("urlType");
             String urlRule =request.getParameter("taskRule");
-            if(request.getParameter("taskName")=="" ||request.getParameter("taskUrl")==""){
+            String checkResult =taskCheck(request);
+            if("empty".equals(checkResult)){
                response.sendRedirect("newTask.jsp?return=empty");
                return;
-            }else if("0".equals(request.getParameter("urlType")) &&  "自定义任务必填...".equals(request.getParameter("taskRule"))){
+            } else if("rule".equals(checkResult)){
                 response.sendRedirect("newTask.jsp?return=rule");
                 return;
             }
-            TaskEntity task = new TaskEntity();
-            task.setTaskName(request.getParameter("taskName"));
-            task.setTaskState(0);   //状态默认未开始
-            task.setTaskType(Integer.valueOf( request.getParameter("taskType")));
-            task.setUrl(request.getParameter("taskUrl"));
-            task.setUrlType(Integer.valueOf(request.getParameter("urlType")));
-            task.setComment(request.getParameter("comment"));
-            task.setCreateTime(new Date(System.currentTimeMillis()));
-            task.setUserId(LoginAction.getIdByName(username));
+            TaskEntity task = request2Task(request,username);
             boolean result = taskAction.newTask(task);
             response.sendRedirect("newTask.jsp?return="+result);
             return;
+        }else if("getTask".equals(method)){
+            int id=Integer.valueOf( request.getParameter("id"));
+            TaskEntity task =taskAction.queryTask(id);
+            request.setAttribute("task",task);
+            request.getRequestDispatcher("/editTask.jsp").forward(request,response);
+            return;
+        }else if("edit".equals(method)){
+            TaskEntity task = request2Task(request,username);
+            task.setId(Integer.valueOf(request.getParameter("id")));
+            String checkResult;
+            checkResult = taskCheck(request);
+            if("empty".equals(checkResult) || "rule".equals(checkResult)){
+
+            }else {
+                boolean result = taskAction.updateTask(task);
+                checkResult = String.valueOf(result);
+            }
+            request.setAttribute("task",task);
+            request.getRequestDispatcher("/editTask.jsp?return="+checkResult).forward(request,response);
+            return;
+
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
+    }
+
+    public String taskCheck(HttpServletRequest request){
+        if(request.getParameter("taskName")=="" ||request.getParameter("taskUrl")==""){
+            return "empty";
+        }else if("0".equals(request.getParameter("urlType")) &&  "自定义任务必填...".equals(request.getParameter("taskRule"))){
+            return  "rule";
+        }else{
+            return "success";
+        }
+
+    }
+
+    public TaskEntity request2Task(HttpServletRequest request,String username){
+        TaskEntity task = new TaskEntity();
+        task.setTaskName(request.getParameter("taskName"));
+        task.setTaskState(0);   //状态默认未开始
+        task.setTaskType(Integer.valueOf( request.getParameter("taskType")));
+        task.setUrl(request.getParameter("taskUrl"));
+        task.setUrlType(Integer.valueOf(request.getParameter("urlType")));
+        task.setComment(request.getParameter("comment"));
+        task.setCreateTime(new Date(System.currentTimeMillis()));
+        task.setUserId(LoginAction.getIdByName(username));
+        return task;
     }
 }

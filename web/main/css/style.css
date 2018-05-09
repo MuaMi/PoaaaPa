@@ -1351,9 +1351,11 @@ progress::-webkit-progress-value {
   border-color: #4bcf99;
 }
 .pagination {
-  text-align: left;
+  text-align:center;
   color: #ccc;
   -webkit-user-select: none;
+  margin-right: auto;
+  margin-left: auto;
 }
 .pagination a {
   color: #3d3d3d;

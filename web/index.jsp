@@ -34,6 +34,7 @@
     TaskAction ta =new TaskAction();
     List<TaskEntity> list = ta.queryAll4User(userid);
     String taskStates[] ={"未开始","进行中","已完成"};
+    String startOrEnd[] ={"开始","结束","结果"};
 %>
 <div class="main-wrap">
   <div class="content-wrap">
@@ -83,9 +84,9 @@
             <td><%=task.getUrl()%></td>
             <td><button class="btn btn-danger radius-rounded"><%=taskStates[task.getTaskState()]%></button></td>
             <td>
-                <a href="javascript:void(0)" title="开始" class="mr-5" id="start">开始</a>
-                <a href="javascript:void(0)" title="编辑" class="mr-5" id="edit">编辑</a>
-                <a href="javascript:void(0)" title="删除" id="delete">删除</a>
+                <a href="javascript:void(0)" title="开始" class="mr-5" id="start"><%=startOrEnd[task.getTaskState()]%></a>
+                <a href="javascript:void(edit(<%=task.getId()%>))" title="编辑" class="mr-5" id="edit">编辑</a>
+                <a href="javascript:void(deleteTask(<%=task.getId()%> ))" title="删除" id="delete">删除</a>
             </td>
           </tr>
           <%
@@ -93,7 +94,11 @@
           %>
           </tbody>
         </table>
-
+          <ul class="pagination">
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+          </ul>
       </div>
 
       <!--开始::结束-->
@@ -113,7 +118,7 @@
         });
     });
     //编辑
-    $('#edit').click(function(){
+    function edit(id) {
         layer.open({
             type: 2,
             title: '编辑任务',
@@ -121,11 +126,11 @@
             shade: false,
             maxmin: true, //开启最大化最小化按钮
             area: ['800px', '500px'],
-            content: 'editTask.jsp'
+            content: 'taskEdit.go?method=getTask&id=' + id
         });
-    });
+    }
     //删除
-    $('#delete').click(function(){
+    function deleteTask(id){
         layer.open({
             content: '是否删除？'
             ,btn: ['确定', '取消']
@@ -138,7 +143,7 @@
                 //右上角关闭回调
             }
         });
-    });
+    }
     //安全退出
     $('#SignOut').click(function(){
         layer.confirm('确定登出管理中心？', {
@@ -160,6 +165,7 @@
             response.sendRedirect("login.jsp?error=1200");
         } %>
     }
+
 </script>
 </body>
 </html>

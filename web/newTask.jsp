@@ -32,7 +32,7 @@
             <div class="form-group-col-2">
                 <div class="form-label">公有/私有：</div>
                 <div class="form-cont">
-                    <select name="taskType" style="width:auto;" onchange="onSelect(this)">
+                    <select name="taskType" style="width:auto;">
                         <option value="1" selected="selected">公有</option>
                         <option value="2">私有</option>
                     </select>
@@ -56,11 +56,11 @@
                 <div class="form-label">任务类别：</div>
                 <div class="form-cont">
                     <select name="urlType" style="width:auto;" onchange="onSelect(this)">
+                        <option value="0" selected="selected">自定义</option>
                         <option value="1">淘宝</option>
                         <option value="2">天猫</option>
                         <option value="3">知乎</option>
                         <option value="4">百度</option>
-                        <option value="0" selected="selected">自定义</option>
                     </select>
                 </div>
             </div>
