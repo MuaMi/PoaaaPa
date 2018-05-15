@@ -72,7 +72,7 @@
             <div  class="form-group-col-2" >
                 <div class="form-label">任务规则：</div>
                 <div class="form-cont">
-                    <textarea id="urlRule" name="taskRule" class="form-control form-boxed">自定义任务必填...</textarea>
+                    <textarea id="urlRule" name="taskRule" class="form-control form-boxed"><%=task.getUrlRule()%></textarea>
                 </div>
             </div>
             <div class="form-group-col-2">
@@ -104,10 +104,13 @@
         document.getElementById("taskType").value=<%=taskType%>;
         document.getElementById("urlType").value=<%=urlType%>;
         function onSelect(select) {
-            if(select.options.selectedIndex==4){
+            if(select.options.selectedIndex==0){
                 document.getElementById("urlRule").readOnly=false;
+                document.getElementById("comment").readOnly=true;
             }else{
                 document.getElementById("urlRule").readOnly=true;
+                document.getElementById("comment").readOnly=false;
+
             }
 
         }
@@ -132,6 +135,9 @@
         }else if("rule"==strreturn)
         {
             layer.msg("修改失败！请输入爬取规则");
+        }else if("running"==strreturn)
+        {
+            layer.msg("修改失败！请先结束该任务");
         }
         else{
             layer.msg("添加失败！未知错误");

@@ -73,7 +73,7 @@
             <div class="form-group-col-2">
                 <div class="form-label">备注：</div>
                 <div class="form-cont">
-                    <textarea name="comment" class="form-control form-boxed">备注信息</textarea>
+                    <textarea id="comment" name="comment" class="form-control form-boxed">自定义任务暂不支持备注</textarea>
                 </div>
             </div>
             <div class="form-group-col-2">
@@ -121,10 +121,12 @@
     //     });
     // });
     function onSelect(select) {
-        if(select.options.selectedIndex==4){
+        if(select.options.selectedIndex==0){
             document.getElementById("urlRule").readOnly=false;
+            document.getElementById("comment").readOnly=true;
         }else{
             document.getElementById("urlRule").readOnly=true;
+            document.getElementById("comment").readOnly=false;
         }
 
     }

@@ -11,6 +11,7 @@ public class TaskEntity {
     int taskState;
     String url;
     int urlType;
+    String urlRule;
     String comment;
     Date createTime;
     Date startTime;
@@ -93,6 +94,14 @@ public class TaskEntity {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public String getUrlRule() {
+        return urlRule;
+    }
+
+    public void setUrlRule(String urlRule) {
+        this.urlRule = urlRule;
     }
 
 }

@@ -28,6 +28,7 @@ public class TaskAction {
                 t.setUrl(rs.getString("url"));
                 t.setUrlType(rs.getInt("urlType"));
                 t.setUserId(rs.getInt("userId"));
+                t.setUrlRule(rs.getString("urlRule"));
                 t.setComment(rs.getString("comment"));
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));
@@ -58,6 +59,7 @@ public class TaskAction {
                 t.setUrl(rs.getString("url"));
                 t.setUrlType(rs.getInt("urlType"));
                 t.setComment(rs.getString("comment"));
+                t.setUrlRule(rs.getString("urlRule"));
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));
                 t.setUserId(rs.getInt("userId"));
@@ -74,8 +76,8 @@ public class TaskAction {
             Connection con = Pa_db.getConnection();
             Statement stmt = con.createStatement();
             String sql = "delete from Task where id= " + id + ";";
-            boolean r= stmt.execute(sql);
-            return r;
+            int r= stmt.executeUpdate(sql);
+            return r>0;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +87,7 @@ public class TaskAction {
     public boolean updateTask(TaskEntity task ){
         try {
             Connection con = Pa_db.getConnection();
-            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?where id =? ;";
+            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?,urlRule=? where id =? ;";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1,task.getTaskName());
             pstmt.setInt(2,task.getTaskType());
@@ -95,7 +97,8 @@ public class TaskAction {
             pstmt.setString(6,task.getComment());
             pstmt.setInt(7,task.getUserId());
             pstmt.setString(8,task.getCreateTime().toString());
-            pstmt.setInt(9,task.getId());
+            pstmt.setString(9,task.getUrlRule());
+            pstmt.setInt(10,task.getId());
 
             int r = pstmt.executeUpdate();
             return r>0;
@@ -108,7 +111,7 @@ public class TaskAction {
     public boolean newTask(TaskEntity task){
         try {
             Connection conn = Pa_db.getConnection();
-            String sql = "insert into task(taskName,taskType,taskState,url,urlType,comment,userId,createTime) values (?,?,?,?,?,?,?,?);";
+            String sql = "insert into task(taskName,taskType,taskState,url,urlType,comment,userId,createTime,urlRule) values (?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,task.getTaskName());
             pstmt.setInt(2,task.getTaskType());
@@ -118,6 +121,8 @@ public class TaskAction {
             pstmt.setString(6,task.getComment());
             pstmt.setInt(7,task.getUserId());
             pstmt.setDate(8,task.getCreateTime());
+            pstmt.setString(9,task.getUrlRule());
+
             int execute = pstmt.executeUpdate();
             if(execute>0){
                 return true;
@@ -144,6 +149,7 @@ public class TaskAction {
                 t.setUrl(rs.getString("url"));
                 t.setUrlType(rs.getInt("urlType"));
                 t.setUserId(rs.getInt("userId"));
+                t.setUrlRule(rs.getString("urlRule"));
                 t.setComment(rs.getString("comment"));
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));

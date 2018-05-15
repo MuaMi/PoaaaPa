@@ -84,7 +84,7 @@
             <td><%=task.getUrl()%></td>
             <td><button class="btn btn-danger radius-rounded"><%=taskStates[task.getTaskState()]%></button></td>
             <td>
-                <a href="javascript:void(0)" title="开始" class="mr-5" id="start"><%=startOrEnd[task.getTaskState()]%></a>
+                <a href="javascript:void(stateChange(<%=task.getId()%>))" title="开始" class="mr-5" id="start"><%=startOrEnd[task.getTaskState()]%></a>
                 <a href="javascript:void(edit(<%=task.getId()%>))" title="编辑" class="mr-5" id="edit">编辑</a>
                 <a href="javascript:void(deleteTask(<%=task.getId()%> ))" title="删除" id="delete">删除</a>
             </td>
@@ -94,7 +94,7 @@
           %>
           </tbody>
         </table>
-          <ul class="pagination">
+          <ul hidden="hidden" class="pagination">
               <a href="#">1</a>
               <a href="#">2</a>
               <a href="#">3</a>
@@ -129,19 +129,34 @@
             content: 'taskEdit.go?method=getTask&id=' + id
         });
     }
+    //开始或结束
+    function stateChange(id) {
+        layer.confirm('确定执行该操作？', {
+            title:'系统提示',
+            btn: ['确定','取消']
+        }, function(){
+            $.post('taskRun.go?id='+id,function (retData) {
+                if (retData == 'success') {
+                    location.reload();
+                } else {
+                    layer.msg("操作失败！");
+                }
+            });
+        });
+    }
     //删除
     function deleteTask(id){
-        layer.open({
-            content: '是否删除？'
-            ,btn: ['确定', '取消']
-            ,yes: function(index, layero){
-                console.log("点击了确定");
-            },no: function(index, layero){
-                //按钮【按钮二】的回调
-            }
-            ,cancel: function(){
-                //右上角关闭回调
-            }
+        layer.confirm('确定删除该任务？', {
+            title:'系统提示',
+            btn: ['确定','取消']
+        }, function(){
+            $.post('taskEdit.go?method=delete&id='+id,function (retData) {
+                if (retData == 'success') {
+                    location.reload();
+                } else {
+                    layer.msg("删除失败！");
+                }
+            });
         });
     }
     //安全退出

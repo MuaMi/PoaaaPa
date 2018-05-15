@@ -21,6 +21,10 @@
         <servlet-name>TaskServlet</servlet-name>
         <servlet-class>cn.poaaapa.TaskEdit.TaskServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TaskRunServlet</servlet-name>
+        <servlet-class>cn.poaaapa.TaskRun.TaskRunServlet</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -29,6 +33,10 @@
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/taskEdit.go</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskRunServlet</servlet-name>
+        <url-pattern>/taskRun.go</url-pattern>
     </servlet-mapping>
 
 </web-app>
