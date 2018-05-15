@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="webcollector-2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../webcollector-2.71-bin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../webcollector-2.71-bin" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../webcollector-2.71-bin" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../webcollector-2.71-bin" recursive="false" type="SOURCES" />
+  </library>
+</component>
