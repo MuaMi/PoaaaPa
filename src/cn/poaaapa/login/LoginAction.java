@@ -1,5 +1,6 @@
 package cn.poaaapa.login;
 
+import cn.poaaapa.crawler.SpiderImgs;
 import cn.poaaapa.db.Pa_db;
 
 import java.sql.*;
@@ -20,6 +21,14 @@ public class LoginAction {
             return "sorry";
         }
     }
+
+
+    //爬虫类
+    public static void GetResult(String url) throws Exception{
+        System.out.println(url);
+        SpiderImgs spider = new SpiderImgs(url);
+    }
+
 
     public static String regist(UserEntity user){
         String result = "failed";

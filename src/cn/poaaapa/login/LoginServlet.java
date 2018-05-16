@@ -1,6 +1,7 @@
 package cn.poaaapa.login;
 
-import com.sleepycat.je.rep.util.ldiff.Window;
+import cn.poaaapa.crawler.SpiderImgs;
+import cn.poaaapa.login.LoginAction;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
+
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         {
@@ -29,11 +33,15 @@ public class LoginServlet extends HttpServlet {
                     System.out.println("登陆成功");
                     request.getSession().setAttribute("username",username);
 
+                    System.out.println("开始扒取");
+                    try {
+                        LoginAction.GetResult("http://www.tooopen.com/img/87.aspx");
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     response.sendRedirect("index.jsp");
 
-//                    request.setAttribute("aaa", "success");
-//
-//                    request.getRequestDispatcher("index.jsp").forward(request, response);
                     return ;
                 }else {
                     System.out.println("错误，登陆失败");

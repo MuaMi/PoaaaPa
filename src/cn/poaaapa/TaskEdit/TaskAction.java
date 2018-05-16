@@ -2,6 +2,8 @@ package cn.poaaapa.TaskEdit;
 
 import cn.poaaapa.db.Pa_db;
 import cn.poaaapa.login.UserEntity;
+import cn.poaaapa.crawler.*;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -124,7 +126,9 @@ public class TaskAction {
             pstmt.setString(9,task.getUrlRule());
 
             int execute = pstmt.executeUpdate();
+
             if(execute>0){
+
                 return true;
             }
         } catch (Exception e) {
