@@ -62,10 +62,11 @@
                 <div class="form-cont">
                     <select id="urlType" name="urlType" style="width:auto;" onchange="onSelect(this)">
                         <option value="0">自定义</option>
-                        <option value="1">淘宝</option>
+                        <option value="1">美团</option>
                         <option value="2">天猫</option>
                         <option value="3">知乎</option>
-                        <option value="4">百度</option>
+                        <option value="4">百度图片</option>
+                        <option value="5">百度贴吧</option>
                     </select>
                 </div>
             </div>

@@ -57,10 +57,11 @@
                 <div class="form-cont">
                     <select name="urlType" style="width:auto;" onchange="onSelect(this)">
                         <option value="0" selected="selected">自定义</option>
-                        <option value="1">淘宝</option>
+                        <option value="1">美团</option>
                         <option value="2">天猫</option>
                         <option value="3">知乎</option>
-                        <option value="4">百度</option>
+                        <option value="4">百度图片</option>
+                        <option value="5">百度贴吧</option>
                     </select>
                 </div>
             </div>
@@ -73,7 +74,7 @@
             <div class="form-group-col-2">
                 <div class="form-label">备注：</div>
                 <div class="form-cont">
-                    <textarea id="comment" name="comment" class="form-control form-boxed">自定义任务暂不支持备注</textarea>
+                    <textarea id="comment" name="comment" class="form-control form-boxed">请填写备注...</textarea>
                 </div>
             </div>
             <div class="form-group-col-2">
