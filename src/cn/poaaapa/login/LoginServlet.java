@@ -34,12 +34,15 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute("username",username);
 
                     System.out.println("开始扒取");
+                    //
                     try {
+
                         LoginAction.GetResult("http://www.tooopen.com/img/87.aspx");
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                     response.sendRedirect("index.jsp");
 
                     return ;
