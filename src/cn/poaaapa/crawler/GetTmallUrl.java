@@ -2,6 +2,7 @@ package cn.poaaapa.crawler;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class GetTmallUrl {
@@ -11,8 +12,10 @@ public class GetTmallUrl {
         Document document = Jsoup.parse(result);
         document.setBaseUri(url);
         //获取所有的img元素
-        Elements elements = document.select("a");
+        Elements elements = document.select("p[class='productPrice']");
 
         System.out.println(elements);
+
+
     }
 }

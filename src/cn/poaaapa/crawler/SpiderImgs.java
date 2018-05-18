@@ -23,6 +23,25 @@ public class SpiderImgs {
         String result = AbstractSpider.getResult(url);
         Document document = Jsoup.parse(result);
         document.setBaseUri(url);
+
+        File dirFile;
+        boolean bFile;
+        bFile = false;
+        try {
+            dirFile = new File("E://img");
+            bFile = dirFile.exists();
+            if (bFile != true) {
+                bFile = dirFile.mkdir();
+                if (bFile == true) {
+                    System.out.println("Create successfully!");
+                } else {
+                    System.out.println("Disable to make the folder,please check the disk is full or not.");
+                    System.exit(1);
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
         //获取所有的img元素
         Elements elements = document.select("img");
         for (Element e : elements) {
@@ -34,12 +53,19 @@ public class SpiderImgs {
             System.out.println(e.absUrl("src"));
             //通过URLConnection得到一个流，将图片写到流中，并且新建文件保存
             InputStream in = urlConnection.getInputStream();
-            OutputStream out = new FileOutputStream(new File("E:\\img\\", imageName));
-            byte[] buf = new byte[1024];
-            int l = 0;
-            while ((l = in.read(buf)) != -1) {
-                out.write(buf, 0, l);
+            if (imageName.matches("[^\\\\s\\\\\\\\/:\\\\*\\\\?\\\\\\\"<>\\\\|](\\\\x20|[^\\\\s\\\\\\\\/:\\\\*\\\\?\\\\\\\"<>\\\\|])*[^\\\\s\\\\\\\\/:\\\\*\\\\?\\\\\\\"<>\\\\|\\\\.]$")){
+                OutputStream out = new FileOutputStream(new File("E:\\img\\", imageName));
+                byte[] buf = new byte[1024];
+                int l = 0;
+                while ((l = in.read(buf)) != -1) {
+                    out.write(buf, 0, l);
+                }
+            } else {
+                System.out.println("不合法");
             }
+
+
+
         }
     }
 }
