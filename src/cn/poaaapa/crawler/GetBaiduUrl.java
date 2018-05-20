@@ -19,9 +19,16 @@ public class GetBaiduUrl {
         Elements num = document.select("span[class='threadlist_rep_num center_text']");
         Elements userName = document.select("span[class='frs-author-name-wrap']");
 
-        System.out.println(title.text());
-        System.out.println(num.text());
-        System.out.println(userName.text());
+        for (Element e : title){
+            System.out.println(e.text());
+        }
+        for (Element e : num){
+            System.out.println(e.text());
+        }
+        for (Element e : userName){
+            System.out.println(e.text());
+        }
+
 
 //        System.out.println(elements.first().text());
     }
