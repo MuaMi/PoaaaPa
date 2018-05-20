@@ -20,8 +20,9 @@ public class TaskRunServlet extends HttpServlet {
         TaskEntity task = tsa.queryTask(id);
         if(task.getTaskState()==0){
             try {
-                if (tra.taskRun(task)){
+                if (tra.taskRunDB(task)){
                     response.getWriter().print("success");
+                    tra.taskRun(task);
                 }
                 else {
                     response.getWriter().print("failed");
