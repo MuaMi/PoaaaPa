@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 public class GetMtUrl {
     public GetMtUrl(String url) throws Exception{
         //获取工具类返回的html,并用Jsoup解析
-        String result = AbstractSpider.getResult(url);
+        String result = WyzCrawler.getResult(url);
         Document document = Jsoup.parse(result);
         document.setBaseUri(url);
         //获取所有的img元素

@@ -10,7 +10,7 @@ public class GetBaiduUrl {
 
     public  GetBaiduUrl(String url) throws Exception{
         //获取工具类返回的html,并用Jsoup解析
-        String result = AbstractSpider.getResult(url);
+        String result = WyzCrawler.getResult(url);
         Document document = Jsoup.parse(result);
         document.setBaseUri(url);
         //获取所有的img元素
@@ -18,6 +18,7 @@ public class GetBaiduUrl {
         Elements title = document.select("a[class='j_th_tit']");
         Elements num = document.select("span[class='threadlist_rep_num center_text']");
         Elements userName = document.select("span[class='frs-author-name-wrap']");
+
 
         for (Element e : title){
             System.out.println(e.text());

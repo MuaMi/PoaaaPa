@@ -12,7 +12,7 @@ import org.apache.http.util.EntityUtils;
  *
  * @author tom
  */
-public class AbstractSpider {
+public class WyzCrawler {
 
     public static String getResult(String url) throws Exception {
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -20,29 +20,28 @@ public class AbstractSpider {
             String result = EntityUtils.toString(response.getEntity());
             return result;
         } catch (Exception e) {
-            System.out.println("获取失败");
-            return "";
+            return "error";
         }
     }
 }
 
 /**
- * 内部类，继承HttpGet，为了设置请求超时的参数
- *
- * @author tom
- *
+ * 设置头部
  */
 class HttpGetConfig extends HttpGet {
     public HttpGetConfig(String url) {
         super(url);
-        setDefaulConfig();
+        set_Config();
     }
 
-    private void setDefaulConfig() {
+    private void set_Config() {
         this.setConfig(RequestConfig.custom()
                 .setConnectionRequestTimeout(10000)
                 .setConnectTimeout(10000)
                 .setSocketTimeout(10000).build());
-        this.setHeader("User-Agent", "spider");
+        this.setHeader("User-Agent", "cs");
+        //部分网站需要设置Cookie才可访问扒取
+        //否则失败
+        this.setHeader("Cookie","uuid=123;");
     }
 }
