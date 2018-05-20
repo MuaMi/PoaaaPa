@@ -7,7 +7,6 @@ package cn.poaaapa.crawler;
 public class GetBaiImgUrl {
     public GetBaiImgUrl(String url) throws Exception{
 
-
         System.out.println(url);
     }
 }

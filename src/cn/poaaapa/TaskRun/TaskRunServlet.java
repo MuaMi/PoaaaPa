@@ -19,17 +19,25 @@ public class TaskRunServlet extends HttpServlet {
         TaskAction tsa = new TaskAction();
         TaskEntity task = tsa.queryTask(id);
         if(task.getTaskState()==0){
-            if (tra.taskRun(task)){
-                response.getWriter().print("success");
-            }
-            else {
-                response.getWriter().print("failed");
+            try {
+                if (tra.taskRun(task)){
+                    response.getWriter().print("success");
+                }
+                else {
+                    response.getWriter().print("failed");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }else if(task.getTaskState()==1){
-            if (tra.taskStop(task)){
-                response.getWriter().print("success");
-            }else {
-                response.getWriter().print("failed");
+            try {
+                if (tra.taskStop(task)){
+                    response.getWriter().print("success");
+                }else {
+                    response.getWriter().print("failed");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }else if(task.getTaskState()==2){
             tra.xlsDownload(id);
