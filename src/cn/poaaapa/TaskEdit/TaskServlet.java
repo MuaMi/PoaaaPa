@@ -113,6 +113,7 @@ public class TaskServlet extends HttpServlet {
         task.setComment(request.getParameter("comment"));
         task.setCreateTime(new Date(System.currentTimeMillis()));
         task.setUserId(LoginAction.getIdByName(username));
+        task.setDocUrl("");
         return task;
     }
 }

@@ -11,8 +11,8 @@ public class GetZhihuUrl {
         Document document = Jsoup.parse(result);
         document.setBaseUri(url);
         //获取所有的img元素
-        Elements elements = document.select("a");
+        Elements users = document.select("div[class='List-item']");
 
-        System.out.println(elements);
+        System.out.println(users);
     }
 }

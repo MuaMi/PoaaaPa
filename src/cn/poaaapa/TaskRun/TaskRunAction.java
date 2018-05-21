@@ -29,7 +29,7 @@ public class TaskRunAction {
             GetMtUrl getmt = new GetMtUrl(task.getUrl());
         } else if (task.getUrlType() == 2){
                 //天猫
-                GetTmallUrl gettm = new GetTmallUrl(task.getUrl());
+                GetTmallUrl gettm = new GetTmallUrl(task.getUrl(),task.getId());
         } else if (task.getUrlType() == 3){
                 //知乎
                 GetZhihuUrl getzhihu = new GetZhihuUrl(task.getUrl());

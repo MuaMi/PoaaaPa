@@ -13,6 +13,7 @@ public class TaskEntity {
     int urlType;
     String urlRule;
     String comment;
+    String docUrl;
     Date createTime;
     Date startTime;
 
@@ -102,6 +103,15 @@ public class TaskEntity {
 
     public void setUrlRule(String urlRule) {
         this.urlRule = urlRule;
+    }
+
+
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
     }
 
 }

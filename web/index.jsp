@@ -138,8 +138,7 @@
             $.post('taskRun.go?id='+id,function (retData) {
                 if (retData == 'success') {
                     location.reload();
-                } else {
-                    layer.msg("操作失败！");
+                    $.post('taskRun.go?method=run&id='+id);
                 }
             });
         });

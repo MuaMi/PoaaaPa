@@ -34,6 +34,7 @@ public class TaskAction {
                 t.setComment(rs.getString("comment"));
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));
+                t.setDocUrl(rs.getString("docUrl"));
                 tl.add(t);
             }
             return tl;
@@ -65,6 +66,7 @@ public class TaskAction {
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));
                 t.setUserId(rs.getInt("userId"));
+                t.setDocUrl(rs.getString("docUrl"));
             }
             return t;
         } catch (Exception e){
@@ -89,7 +91,7 @@ public class TaskAction {
     public boolean updateTask(TaskEntity task ){
         try {
             Connection con = Pa_db.getConnection();
-            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?,urlRule=? where id =? ;";
+            String sql= "update Task set taskName =? ,taskType =? ,taskState =? ,url =? ,urlType =? ,comment =? ,userId =? ,createTime =?,urlRule=? ,docUrl=? where id =? ;";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1,task.getTaskName());
             pstmt.setInt(2,task.getTaskType());
@@ -100,7 +102,8 @@ public class TaskAction {
             pstmt.setInt(7,task.getUserId());
             pstmt.setString(8,task.getCreateTime().toString());
             pstmt.setString(9,task.getUrlRule());
-            pstmt.setInt(10,task.getId());
+            pstmt.setString(10,task.getDocUrl());
+            pstmt.setInt(11,task.getId());
 
             int r = pstmt.executeUpdate();
             return r>0;
@@ -113,7 +116,7 @@ public class TaskAction {
     public boolean newTask(TaskEntity task){
         try {
             Connection conn = Pa_db.getConnection();
-            String sql = "insert into task(taskName,taskType,taskState,url,urlType,comment,userId,createTime,urlRule) values (?,?,?,?,?,?,?,?,?);";
+            String sql = "insert into task(taskName,taskType,taskState,url,urlType,comment,userId,createTime,urlRule,docUrl) values (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,task.getTaskName());
             pstmt.setInt(2,task.getTaskType());
@@ -124,6 +127,7 @@ public class TaskAction {
             pstmt.setInt(7,task.getUserId());
             pstmt.setDate(8,task.getCreateTime());
             pstmt.setString(9,task.getUrlRule());
+            pstmt.setString(10,task.getDocUrl());
 
             int execute = pstmt.executeUpdate();
 
@@ -157,12 +161,29 @@ public class TaskAction {
                 t.setComment(rs.getString("comment"));
                 t.setCreateTime(rs.getDate("createTime"));
                 t.setStartTime(rs.getDate("startTime"));
+                t.setDocUrl(rs.getString("docUrl"));
                 rl.add(t);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return rl;
+    }
+
+    public boolean updateDocUrl (int id,String docUrl){
+        try {
+            Connection conn =  Pa_db.getConnection();
+            String sql = "update Task set docUrl =? ,taskState =2 where id =?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,docUrl);
+            pstmt.setInt(2,id);
+            int result = pstmt.executeUpdate();
+            conn.close();
+            return result>0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

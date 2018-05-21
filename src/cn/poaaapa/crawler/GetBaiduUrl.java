@@ -1,6 +1,7 @@
 package cn.poaaapa.crawler;
 
 import cn.edu.hfut.dmic.webcollector.model.Page;
+import cn.poaaapa.TaskEdit.TaskAction;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -63,10 +64,13 @@ public class GetBaiduUrl {
         Date date = new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHmmss");
         String strDate =sdf.format(date);
-        String path = this.getClass().getResource("").getPath();
-        OutputStream out = new FileOutputStream(path+id+"_"+strDate+".xls");
+        String path = this.getClass().getClassLoader().getResource("").getPath();
+        String docUrl =path+"doc/"+id+"_"+strDate+".xls";
+        OutputStream out = new FileOutputStream(docUrl);
         wb.write(out);
         out.close();
+        TaskAction tsa = new TaskAction();
+        tsa.updateDocUrl(id,docUrl);
 
 
 //        System.out.println(elements.first().text());

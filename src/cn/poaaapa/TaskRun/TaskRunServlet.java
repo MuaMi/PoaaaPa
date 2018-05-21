@@ -14,15 +14,24 @@ import java.io.IOException;
 public class TaskRunServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String method = request.getParameter("method");
         TaskRunAction tra =new TaskRunAction();
         int id = Integer.valueOf(request.getParameter("id"));
         TaskAction tsa = new TaskAction();
         TaskEntity task = tsa.queryTask(id);
+        if(method!=null && "run".equals(method)){
+            try {
+                tra.taskRun(task);
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         if(task.getTaskState()==0){
             try {
                 if (tra.taskRunDB(task)){
                     response.getWriter().print("success");
-                    tra.taskRun(task);
+                    //tra.taskRun(task);
                 }
                 else {
                     response.getWriter().print("failed");
