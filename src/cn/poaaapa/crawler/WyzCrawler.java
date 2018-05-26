@@ -42,6 +42,6 @@ class HttpGetConfig extends HttpGet {
         this.setHeader("User-Agent", "cs");
         //部分网站需要设置Cookie才可访问扒取
         //否则失败
-        this.setHeader("Cookie","uuid=123;");
+        //this.setHeader("Cookie","uuid=123;");
     }
 }

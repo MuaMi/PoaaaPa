@@ -6,6 +6,8 @@ import cn.poaaapa.crawler.CrawlerAction;
 
 import cn.poaaapa.crawler.*;
 
+import java.io.File;
+
 public class TaskRunAction {
 
     public boolean taskRunDB(TaskEntity task) throws Exception {
@@ -23,6 +25,7 @@ public class TaskRunAction {
     public boolean taskRun(TaskEntity task) throws Exception {
 
         if (task.getUrlType() == 0){
+            GetCustomUrl getCustomUrl =new GetCustomUrl(task.getUrl(),task.getUrlRule(),task.getId());
             System.out.println("自定义");
         } else if (task.getUrlType() == 1){
                 //美团
@@ -35,7 +38,8 @@ public class TaskRunAction {
                 GetZhihuUrl getzhihu = new GetZhihuUrl(task.getUrl());
         } else if (task.getUrlType() == 4){
                 //百度图片
-                GetBaiImgUrl getimg = new GetBaiImgUrl(task.getUrl());
+                GetBaiImgUrl getimg = new GetBaiImgUrl(task.getUrl(),task.getId());
+            //SpiderImgs spiderImgs =new SpiderImgs(task.getUrl(),task.getId());
         } else {
                 //百度贴吧
                 GetBaiduUrl getbd = new GetBaiduUrl(task.getUrl(),task.getId());
@@ -54,11 +58,12 @@ public class TaskRunAction {
             return  false;
         }
         return true;
-
     }
 
-    public void xlsDownload(int id){
-
+    public String xlsDownload(int id){
+        TaskAction tsa =new TaskAction();
+        TaskEntity task = tsa.queryTask(id);
+        return task.getDocUrl();
     }
 
 }

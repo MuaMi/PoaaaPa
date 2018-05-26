@@ -34,7 +34,7 @@
     TaskAction ta =new TaskAction();
     List<TaskEntity> list = ta.queryAll4User(userid);
     String taskStates[] ={"未开始","进行中","已完成"};
-    String startOrEnd[] ={"开始","结束","结果"};
+    String startOrEnd[] ={"开始","结束","开始"};
 %>
 <div class="main-wrap">
   <div class="content-wrap">
@@ -81,12 +81,13 @@
           <tr class="cen">
             <td><%=task.getId()%></td>
             <td><%=task.getTaskName()%></td>
-            <td><%=task.getUrl()%></td>
+            <td style="width: 100px"><%=task.getUrl().length()>100?task.getUrl().substring(0,100):task.getUrl() %></td>
             <td><button class="btn btn-danger radius-rounded"><%=taskStates[task.getTaskState()]%></button></td>
             <td>
                 <a href="javascript:void(stateChange(<%=task.getId()%>))" title="开始" class="mr-5" id="start"><%=startOrEnd[task.getTaskState()]%></a>
                 <a href="javascript:void(edit(<%=task.getId()%>))" title="编辑" class="mr-5" id="edit">编辑</a>
-                <a href="javascript:void(deleteTask(<%=task.getId()%> ))" title="删除" id="delete">删除</a>
+              <a href="javascript:void(deleteTask(<%=task.getId()%> ))" title="删除" id="delete">删除</a>
+              <a href="taskRun.go?method=download&id=<%=task.getId()%>" title="结果" id="download">结果</a>
             </td>
           </tr>
           <%
@@ -135,13 +136,19 @@
             title:'系统提示',
             btn: ['确定','取消']
         }, function(){
-            $.post('taskRun.go?id='+id,function (retData) {
-                if (retData == 'success') {
+            $.post('taskRun.go?method=start&id='+id,function (retData) {
+                if (retData == 'start') {
                     location.reload();
                     $.post('taskRun.go?method=run&id='+id);
+                }else {
+                    location.reload();
                 }
             });
         });
+    }
+//下载
+    function download(id) {
+        $.post('taskRun.go?method=download&id='+id);
     }
     //删除
     function deleteTask(id){

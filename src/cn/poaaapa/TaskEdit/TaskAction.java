@@ -146,7 +146,7 @@ public class TaskAction {
         try {
             Connection conn = Pa_db.getConnection();
             Statement stmt =conn.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from Task where urlType = 1 or userId ="+userid+";");
+            ResultSet rs=stmt.executeQuery("select * from Task where taskType = 1 or userId ="+userid+";");
             while(rs.next()){
                 TaskEntity task = new TaskEntity();
                 TaskEntity t = new TaskEntity();

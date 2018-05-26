@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -64,15 +65,17 @@ public class GetBaiduUrl {
         Date date = new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd_HHmmss");
         String strDate =sdf.format(date);
-        String path = this.getClass().getClassLoader().getResource("").getPath();
-        String docUrl =path+"doc/"+id+"_"+strDate+".xls";
+//        String path = this.getClass().getClassLoader().getResource("/").getPath();
+
+        File dic =new File(".");
+        String path = dic.getCanonicalPath();
+        String docUrl =path+"/doc/"+id+"_"+strDate+".xls";
+        System.out.println(docUrl);
         OutputStream out = new FileOutputStream(docUrl);
         wb.write(out);
         out.close();
         TaskAction tsa = new TaskAction();
-        tsa.updateDocUrl(id,docUrl);
-
-
+        tsa.updateDocUrl(id,id+"_"+strDate+".xls");
 //        System.out.println(elements.first().text());
     }
 

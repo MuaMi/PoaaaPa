@@ -26,7 +26,7 @@ public class LoginAction {
     //爬虫类
     public static void GetResult(String url) throws Exception{
         System.out.println(url);
-        SpiderImgs spider = new SpiderImgs(url);
+     //   SpiderImgs spider = new SpiderImgs(url);
     }
 
 
